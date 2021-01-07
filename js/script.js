@@ -6,7 +6,6 @@ $(document).ready(function() {
 	let lock = false;
 	let firstCard;
 	let secondCard;
-	let counter = 0;
 
 	function randomPos() {
 		for (var i = 0; i < cardOuter.length; i++) {
