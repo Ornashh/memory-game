@@ -41,7 +41,6 @@ $(document).ready(function() {
 		let checkCards = $(firstCard).data('social') === $(secondCard).data('social');
 		if (checkCards) {
 			matched();
-			counter++;
 		} else {
 			unmatched();
 		}
