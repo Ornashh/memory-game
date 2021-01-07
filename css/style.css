@@ -1,0 +1,91 @@
+@font-face {
+	font-family: 'Poppins-Bold';
+	src: url('../fonts/Poppins-Bold.eot');
+	src: url('../fonts/Poppins-Bold.woff') format('woff'),
+		url('../fonts/Poppins-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins-Bold';
+}
+
+.header {
+	background: url(../img/1.jpg) no-repeat center center/cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	position: relative;
+	overflow-y: hidden;
+}
+
+h1 {
+	font-size: 4rem;
+	color: #fff;
+	text-align: center;
+	text-shadow: 3px 3px 5px #000;
+	margin: 20px 0;
+}
+
+.container {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.game {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+	.game {
+		padding-bottom: 50px;
+	}
+}
+
+.card-outer {
+	width: 130px;
+	height: 180px;
+	margin: 5px;
+	perspective: 1000px;
+}
+
+.card-inner {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	transform-style: preserve-3d;
+	transition: transform 0.3s ease;
+}
+
+.front, .back {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	backface-visibility: hidden;
+	border-radius: 5px;
+}
+
+.front {
+	background-color: white;
+}
+
+.back {
+	background-color: white;
+	transform: rotateY(180deg);
+}
+
+.flip {
+	transform: rotateY(180deg);
+}
