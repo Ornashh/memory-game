@@ -1,1 +1,1 @@
-Memory game with vanilla javaScript
+<strong>Memory game with vanilla javaScript</strong>
