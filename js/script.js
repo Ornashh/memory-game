@@ -1,20 +1,21 @@
-let cards = document.querySelectorAll('.card-inner');
-let cardOuter = document.querySelectorAll('.card-outer');
-let startBtn = document.querySelector('.start-btn');
-let recordsBtn = document.querySelector('.records-btn');
-let closeBtn = document.querySelector('.close-btn');
-let records = document.querySelector('.records');
-let recordsList = document.querySelector('.records-list');
-let win = document.querySelector('.win');
-let timer = document.querySelector('.timer');
-let sec = 0;
-let min = 0;
-let interval = false;
-let clicked = false;
-let lock = false;
-let firstCard;
-let secondCard;
-let counter = 0;
+let cards = document.querySelectorAll('.card-inner'),
+	cardOuter = document.querySelectorAll('.card-outer'),
+ 	startBtn = document.querySelector('.start-btn'),
+ 	stopBtn = document.querySelector('.stop-btn'),
+ 	recordsBtn = document.querySelector('.records-btn'),
+ 	closeBtn = document.querySelector('.close-btn'),
+ 	records = document.querySelector('.records'),
+ 	recordsList = document.querySelector('.records-list'),
+ 	win = document.querySelector('.win'),
+ 	timer = document.querySelector('.timer'),
+ 	sec = 0,
+ 	min = 0,
+ 	interval = false,
+ 	clicked = false,
+ 	lock = false,
+ 	firstCard = null,
+ 	secondCard = null,
+ 	counter = 0;
 
 function time() {
 	sec++;
@@ -25,7 +26,7 @@ function time() {
 	}
 }
 
-function getTime() { 
+function getTime() {
 	return (min < 10 ? '0' + min : min) + ':' + (sec < 10 ? '0' + sec : sec);
 }
 
@@ -47,15 +48,20 @@ function matched() {
 	firstCard.removeEventListener('click', start);
 	secondCard.removeEventListener('click', start);
 	reset();
+
 	counter++;
+
 	if (counter == 6) {
 		counter = 0;
+
 		win.style.transform = 'scale(1)';
-		startBtn.style.display = 'block';
-		recordsBtn.style.display = 'block';
+		startBtn.textContent = 'Start';
+		stopBtn.disabled = true;
+
 		let li = document.createElement('li');
 		li.innerText = getTime();
 		recordsList.appendChild(li);
+
 		clearInterval(interval);
 		interval = false;
 	}
@@ -63,6 +69,7 @@ function matched() {
 
 function unmatched() {
 	lock = true;
+
 	setTimeout(() => {
 		firstCard.classList.remove('flip');
 		secondCard.classList.remove('flip');
@@ -72,6 +79,7 @@ function unmatched() {
 
 function check() {
 	let checkCards = firstCard.dataset.language === secondCard.dataset.language;
+
 	if (checkCards) {
 		matched();
 	} else {
@@ -80,10 +88,8 @@ function check() {
 }
 
 function start() {
-	if (lock) 
-		return;
-	if (this === firstCard) 
-		return;
+	if (lock) return;
+	if (this === firstCard) return;
 
 	this.classList.add('flip');
 
@@ -92,30 +98,57 @@ function start() {
 		firstCard = this;
 		return;
 	}
+
 	secondCard = this;
+
 	check();
 }
 
 startBtn.addEventListener('click', function() {
+	counter = 0;
+
+	sec = -1;
 	min = 0;
-	sec = 0;
+
 	if (!interval) {
 		interval = setInterval(time, 1000);
 	}
+
 	win.style.transform = 'scale(0)';
-	startBtn.style.display = 'none';
-	recordsBtn.style.display = 'none';
+	startBtn.textContent = 'Reset';
+	stopBtn.disabled = false;
+
 	records.classList.remove('activeRecords');
+
 	randomPos();
 	cards.forEach(function(card) {
 		card.classList.add('flip');
 		setTimeout(() => {
 			card.classList.remove('flip');
-		}, 800);
+		}, 1000);
 		card.addEventListener('click', start);
 	});
 });
 
+stopBtn.addEventListener('click', function() {
+	reset();
+
+	counter = 0;
+	
+	sec = -1;
+	min = 0;
+	
+	clearInterval(interval);
+	interval = false;
+
+	timer.textContent = '00:00';
+	startBtn.textContent = 'Start';
+
+	cards.forEach(function(card) {
+		card.classList.remove('flip');
+		card.removeEventListener('click', start);
+	});
+});
 
 closeBtn.addEventListener('click', function() {
 	records.classList.remove('activeRecords');
