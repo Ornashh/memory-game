@@ -1,132 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Memory game</title>
-	<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-	<header class="header">
-		<div class="win">You won</div>
-		<div class="records">
-			<button class="close-btn">&times;</button>
-			<h2>Records</h2>
-			<ul class="records-list"></ul>
-		</div>
-		<div class="container">
-			<h1>Memory Game</h1>
-			<div class="cards">
-				<div class="card-outer">
-					<div class="card-inner" data-language="cplusplus">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/cplusplus.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="cplusplus">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/cplusplus.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="python">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/python.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="python">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/python.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="java">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/java.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="java">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/java.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="php">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/php.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="php">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/php.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="csharp">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/csharp.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="csharp">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/csharp.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="js">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/js.png" alt="">
-						</div>
-					</div>
-				</div>
-				<div class="card-outer">
-					<div class="card-inner" data-language="js">
-						<div class="front"></div>
-						<div class="back">
-							<img src="img/js.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="game">
-				<div class="buttons">
-					<button class="start-btn">Start</button>
-					<button class="stop-btn">Stop</button>
-					<button class="records-btn">Records</button>
-				</div>
-				<div class="timer">
-					00:00
-				</div>
-			</div>
-		</div>
-	</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory game</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="win">You won</div>
+      <div class="records">
+        <button class="close-btn">&times;</button>
+        <h2>Records</h2>
+        <ul class="records-list"></ul>
+      </div>
+      <div class="container">
+        <h1>Memory Game</h1>
+        <div class="cards">
+          <div class="card-outer">
+            <div class="card-inner" data-language="cplusplus">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/cplusplus.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="cplusplus">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/cplusplus.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="python">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/python.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="python">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/python.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="java">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/java.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="java">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/java.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="php">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/php.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="php">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/php.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="csharp">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/csharp.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="csharp">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/csharp.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="js">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/js.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="card-outer">
+            <div class="card-inner" data-language="js">
+              <div class="front"></div>
+              <div class="back">
+                <img src="img/js.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="game">
+          <div class="buttons">
+            <button class="start-btn">Start</button>
+            <button class="stop-btn">Stop</button>
+            <button class="records-btn">Records</button>
+          </div>
+          <div class="timer">00:00</div>
+        </div>
+      </div>
+    </header>
 
-	<script src="js/script.js"></script>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>

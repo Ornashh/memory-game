@@ -1,159 +1,160 @@
-let cards = document.querySelectorAll('.card-inner'),
-	cardOuter = document.querySelectorAll('.card-outer'),
- 	startBtn = document.querySelector('.start-btn'),
- 	stopBtn = document.querySelector('.stop-btn'),
- 	recordsBtn = document.querySelector('.records-btn'),
- 	closeBtn = document.querySelector('.close-btn'),
- 	records = document.querySelector('.records'),
- 	recordsList = document.querySelector('.records-list'),
- 	win = document.querySelector('.win'),
- 	timer = document.querySelector('.timer'),
- 	sec = 0,
- 	min = 0,
- 	interval = false,
- 	clicked = false,
- 	lock = false,
- 	firstCard = null,
- 	secondCard = null,
- 	counter = 0;
+const cardsEl = document.querySelectorAll(".card-inner");
+const cardOuterEl = document.querySelectorAll(".card-outer");
+const startBtn = document.querySelector(".start-btn");
+const stopBtn = document.querySelector(".stop-btn");
+const recordsBtn = document.querySelector(".records-btn");
+const closeBtn = document.querySelector(".close-btn");
+const recordsEl = document.querySelector(".records");
+const recordsListEl = document.querySelector(".records-list");
+const winEl = document.querySelector(".win");
+const timerEl = document.querySelector(".timer");
+
+let sec = 0;
+let min = 0;
+let interval = false;
+let clicked = false;
+let lock = false;
+let firstCard = null;
+let secondCard = null;
+let counter = 0;
 
 function time() {
-	sec++;
-	timer.textContent = getTime();
-	if (sec == 59) {
-		sec = 0;
-		min++;
-	}
+  sec++;
+  timerEl.textContent = getTime();
+  if (sec == 59) {
+    sec = 0;
+    min++;
+  }
 }
 
 function getTime() {
-	return (min < 10 ? '0' + min : min) + ':' + (sec < 10 ? '0' + sec : sec);
+  return (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
 }
 
 function randomPos() {
-	for (var i = 0; i < cardOuter.length; i++) {
-		let random = Math.floor(Math.random() * cardOuter.length);
-		cardOuter[i].style.order = random;
-	}
+  for (var i = 0; i < cardOuterEl.length; i++) {
+    let random = Math.floor(Math.random() * cardOuterEl.length);
+    cardOuterEl[i].style.order = random;
+  }
 }
 
 function reset() {
-	clicked = false;
-	lock = false;
-	firstCard = null;
-	secondCard = null;
+  clicked = false;
+  lock = false;
+  firstCard = null;
+  secondCard = null;
 }
 
 function matched() {
-	firstCard.removeEventListener('click', start);
-	secondCard.removeEventListener('click', start);
-	reset();
+  firstCard.removeEventListener("click", start);
+  secondCard.removeEventListener("click", start);
+  reset();
 
-	counter++;
+  counter++;
 
-	if (counter == 6) {
-		counter = 0;
+  if (counter == 6) {
+    counter = 0;
 
-		win.style.transform = 'scale(1)';
-		startBtn.textContent = 'Start';
-		stopBtn.disabled = true;
+    winEl.classList.add("show-win");
+    startBtn.textContent = "Start";
+    stopBtn.disabled = true;
 
-		let li = document.createElement('li');
-		li.innerText = getTime();
-		recordsList.appendChild(li);
+    let li = document.createElement("li");
+    li.innerText = getTime();
+    recordsListEl.appendChild(li);
 
-		clearInterval(interval);
-		interval = false;
-	}
+    clearInterval(interval);
+    interval = false;
+  }
 }
 
 function unmatched() {
-	lock = true;
+  lock = true;
 
-	setTimeout(() => {
-		firstCard.classList.remove('flip');
-		secondCard.classList.remove('flip');
-		reset();
-	}, 500);
+  setTimeout(() => {
+    firstCard.classList.remove("flip");
+    secondCard.classList.remove("flip");
+    reset();
+  }, 500);
 }
 
 function check() {
-	let checkCards = firstCard.dataset.language === secondCard.dataset.language;
+  let checkCards = firstCard.dataset.language === secondCard.dataset.language;
 
-	if (checkCards) {
-		matched();
-	} else {
-		unmatched();
-	}
+  if (checkCards) {
+    matched();
+  } else {
+    unmatched();
+  }
 }
 
 function start() {
-	if (lock) return;
-	if (this === firstCard) return;
+  if (lock) return;
+  if (this === firstCard) return;
 
-	this.classList.add('flip');
+  this.classList.add("flip");
 
-	if (!clicked) {
-		clicked = true;
-		firstCard = this;
-		return;
-	}
+  if (!clicked) {
+    clicked = true;
+    firstCard = this;
+    return;
+  }
 
-	secondCard = this;
+  secondCard = this;
 
-	check();
+  check();
 }
 
-startBtn.addEventListener('click', function() {
-	counter = 0;
+startBtn.addEventListener("click", function () {
+  counter = 0;
 
-	sec = -1;
-	min = 0;
+  sec = -1;
+  min = 0;
 
-	if (!interval) {
-		interval = setInterval(time, 1000);
-	}
+  if (!interval) {
+    interval = setInterval(time, 1000);
+  }
 
-	win.style.transform = 'scale(0)';
-	startBtn.textContent = 'Reset';
-	stopBtn.disabled = false;
+  winEl.classList.remove("show-win");
+  startBtn.textContent = "Reset";
+  stopBtn.disabled = false;
 
-	records.classList.remove('activeRecords');
+  recordsEl.classList.remove("show-records");
 
-	randomPos();
-	cards.forEach(function(card) {
-		card.classList.add('flip');
-		setTimeout(() => {
-			card.classList.remove('flip');
-		}, 1000);
-		card.addEventListener('click', start);
-	});
+  randomPos();
+  cardsEl.forEach((card) => {
+    card.classList.add("flip");
+    setTimeout(() => {
+      card.classList.remove("flip");
+    }, 1000);
+    card.addEventListener("click", start);
+  });
 });
 
-stopBtn.addEventListener('click', function() {
-	reset();
+stopBtn.addEventListener("click", function () {
+  reset();
 
-	counter = 0;
-	
-	sec = -1;
-	min = 0;
-	
-	clearInterval(interval);
-	interval = false;
+  counter = 0;
 
-	timer.textContent = '00:00';
-	startBtn.textContent = 'Start';
+  sec = -1;
+  min = 0;
 
-	cards.forEach(function(card) {
-		card.classList.remove('flip');
-		card.removeEventListener('click', start);
-	});
+  clearInterval(interval);
+  interval = false;
+
+  timerEl.textContent = "00:00";
+  startBtn.textContent = "Start";
+
+  cardsEl.forEach(function (card) {
+    card.classList.remove("flip");
+    card.removeEventListener("click", start);
+  });
 });
 
-closeBtn.addEventListener('click', function() {
-	records.classList.remove('activeRecords');
+closeBtn.addEventListener("click", function () {
+  recordsEl.classList.remove("show-records");
 });
 
-recordsBtn.addEventListener('click', function() {
-	records.classList.toggle('activeRecords');
+recordsBtn.addEventListener("click", function () {
+  recordsEl.classList.toggle("show-records");
 });
