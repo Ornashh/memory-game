@@ -1,4 +1,5 @@
-<strong>Memory game in vanilla javaScript</strong>
+<strong>Memory game in vanilla JavaScript</strong>
+---
 
 [Demo](https://ornash-memorygame.netlify.app)
 
